@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="assets/css/plugins/feature.css">
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        emailjs.init('blYSazPDVc3QmbPJp')
+    </script>
 </head>
 
 <body class="template-color-1 home-sticky spybody" data-spy="scroll" data-bs-target=".navbar-example2" data-offset="150">
@@ -991,7 +995,7 @@
                         <div class="contact-form-wrapper">
                             <div class="introduce">
 
-                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="contact.php">
+                                <form class="rnt-contact-form rwt-dynamic-form row" id="form">
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -1601,6 +1605,31 @@
             }
 
         );
+    </script>
+
+
+
+    <script>
+        const btn = document.getElementById('submit');
+
+        document.getElementById('form')
+        .addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        btn.value = 'Sending...';
+
+        const serviceID = 'default_service';
+        const templateID = 'template_95qptji';
+
+        emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+        btn.value = 'Send Email';
+        alert('Sent!');
+        }, (err) => {
+        btn.value = 'Send Email';
+        alert(JSON.stringify(err));
+        });
+        });
     </script>
 </body>
 
